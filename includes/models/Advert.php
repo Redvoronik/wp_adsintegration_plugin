@@ -3,11 +3,30 @@
 class Advert
 {
     private $post = null;
+    private $article_id = null;
+    private $name = null;
+    private $text = null;
+    private $end_date = null;
+    private $is_active = null;
 
     public static $table = 'wp_advert_integration';
 
-    function __construct(int $post_id) {
-        $this->post = get_post($post_id);
+    function __construct(array $input) {
+        $this->article_id = $input['article_id'];
+        $this->name = $input['name'];
+        $this->text = $input['text'];
+        $this->end_date = $input['end_date'];
+        $this->is_active = $input['is_active'] ? 1 : 0;
+        $this->post = get_post($input['article_id']);
+    }
+
+    public function save()
+    {
+        require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+
+        $sql = "INSERT INTO " . self::$table . " (`article_id`, `name`, `text`, `end_date`, `is_active`) VALUES ( " . $this->article_id . ", '" . $this->name . "', '" . $this->text . "', '" . $this->end_date . "', " . $this->is_active . ")";
+
+        dbDelta($sql);
     }
 
     public static function getAll(string $param = null, $page = 1)

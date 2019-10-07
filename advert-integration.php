@@ -47,4 +47,12 @@ function createLinkOnMainMenuAdvert()
         null,
         'dashicons-migrate'
     );
+
+    add_submenu_page(
+        'advert-integration/includes/main.php',
+        'Добавить новую',
+        'Добавить новую',
+        'manage_options',
+        'advert-integration/includes/create.php'
+    );
 }

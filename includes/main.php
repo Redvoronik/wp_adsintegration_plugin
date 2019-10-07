@@ -4,15 +4,17 @@
 
 	$adverts 	= Advert::getAll($param);
 
-	$mainUrl = '/wp-admin/admin.php?page=advert-integration%2Fincludes%2Fmain.php';
-	$formUrl = $mainUrl . '&method=edit';
+	$mainUrl = '/wp-admin/admin.php?page=advert-integration%2Fincludes%2F';
 ?>
 
-<div>
-	<h1>Рекламные интеграции</h1>
+<div class="wrap" id="wp-media-grid" data-search="">
+	<div>
+		<h1 style="display: inline-block;">Рекламные интеграции</h1>
+		<a style="display: inline-block;" href="<?= $mainUrl ?>create.php" class="page-title-action aria-button-if-js" role="button" aria-expanded="false">Добавить новую</a>
+	</div>
 	
 	<?php if(!empty($adverts)): ?>
-	<div style="margin-top: 70px;">
+	<div style="margin-top: 30px;">
 		<table cellspacing="2" border="1" cellpadding="5" style="border-color: #AAA;">
 			<thead>
 				<th>id</th>
@@ -31,8 +33,8 @@
 						<td>[article_advertising_place id="<?= $advert->id ?>"]</td>
 						<td><?= (($advert->is_active) ? 'Да' : 'Нет') ?></td>
 						<td>
-							<a href="" type="button">Редактировать</a>
-							<form method="post" action="<?= $formUrl ?>">
+							<a href="<?= plugins_url( 'edit.php', __FILE__ ); ?>" type="button">Редактировать</a>
+							<form method="post" action="<?= $mainUrl ?>main.php">
 								<input type="hidden" name="post_id" value="<?= $advert->id ?>">
 								<button type="submit">Удалить</button>
 							</form>
