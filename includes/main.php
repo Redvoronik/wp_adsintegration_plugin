@@ -16,22 +16,25 @@
 		<table cellspacing="2" border="1" cellpadding="5" style="border-color: #AAA;">
 			<thead>
 				<th>id</th>
-				<th>Заголовок</th>
-				<th>Кол-во похожих</th>
-				<th>Обновлено</th>
+				<th>Контакты</th>
+				<th>Дата завершения</th>
+				<th>Шорткод</th>
+				<th>Активность</th>
 				<th>Действия</th>
 			</thead>
 			<tbody>
 				<?php foreach($adverts as $advert): ?>
 					<tr>
-						<td><?= $advert->id ?></td>
-						<td><a target="_blank" href="/<?= $advert->url ?>"><?= $advert->title ?></a></td>
-						<td><?= $advert->count_advert_article_id ?></td>
-						<td><?= $advert->updated_at ?></td>
+						<td><a target="_blank" href="/<?= $advert->url ?>"><?= $advert->article_id ?></a></td>
+						<td><?= $advert->name ?></td>
+						<td><?= $advert->end_date ?></td>
+						<td>[article_advertising_place id="<?= $advert->id ?>"]</td>
+						<td><?= (($advert->is_active) ? 'Да' : 'Нет') ?></td>
 						<td>
+							<a href="" type="button">Редактировать</a>
 							<form method="post" action="<?= $formUrl ?>">
 								<input type="hidden" name="post_id" value="<?= $advert->id ?>">
-								<button type="submit">Обновить</button>
+								<button type="submit">Удалить</button>
 							</form>
 						</td>
 					</tr>

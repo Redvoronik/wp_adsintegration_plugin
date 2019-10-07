@@ -25,7 +25,7 @@ function createDatabaseAdvert()
           article_id int(11) DEFAULT NULL,
           text text COLLATE utf8_unicode_ci,
           name varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-          end_date int(11) DEFAULT NULL,
+          end_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
           is_active tinyint(1) DEFAULT '1',
           UNIQUE KEY id (id)
         );";
