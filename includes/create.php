@@ -4,7 +4,6 @@ if(!empty($_POST))
 	$advert = new Advert($_POST);
 	$advert->save();
 }
-
 ?>
 
 <div class="wrap" id="wp-media-grid" data-search="">

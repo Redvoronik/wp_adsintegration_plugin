@@ -9,6 +9,7 @@
 require_once plugin_dir_path(__FILE__) . 'includes/models/Advert.php';
 
 add_action('admin_menu', 'createLinkOnMainMenuAdvert');
+add_shortcode('article_advertising_place', 'renderIntegration');
 
 
 function createDatabaseAdvert()
@@ -55,4 +56,10 @@ function createLinkOnMainMenuAdvert()
         'manage_options',
         'advert-integration/includes/create.php'
     );
+}
+
+function renderIntegration($atts)
+{
+   $advert = Advert::find($atts['id'], true);
+   return $advert->getText();
 }

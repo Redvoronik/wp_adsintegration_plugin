@@ -33,7 +33,7 @@
 						<td>[article_advertising_place id="<?= $advert->id ?>"]</td>
 						<td><?= (($advert->is_active) ? 'Да' : 'Нет') ?></td>
 						<td>
-							<a href="<?= plugins_url( 'edit.php', __FILE__ ); ?>" type="button">Редактировать</a>
+							<a href="/wp-admin/admin.php?page=advert-integration%2Fincludes%2Fedit.php&post_id=<?= $advert->id ?>" type="button">Редактировать</a>
 							<form method="post" action="<?= $mainUrl ?>main.php">
 								<input type="hidden" name="post_id" value="<?= $advert->id ?>">
 								<button type="submit">Удалить</button>
