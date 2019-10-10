@@ -27,8 +27,8 @@
 			<tbody>
 				<?php foreach($adverts as $advert): ?>
 					<tr>
-						<td><a target="_blank" href="/<?= $advert->url ?>"><?= $advert->article_id ?></a></td>
-						<td><?= $advert->name ?></td>
+						<td><a target="_blank" href="/<?= $advert->url ?>"><?= $advert->post_id ?></a></td>
+						<td><?= $advert->contact ?></td>
 						<td><?= $advert->end_date ?></td>
 						<td>[article_advertising_place id="<?= $advert->id ?>"]</td>
 						<td><?= (($advert->is_active) ? 'Да' : 'Нет') ?></td>

@@ -2,31 +2,29 @@
 
 class Advert
 {
-    private $post = null;
-    private $article_id = null;
-    private $name = null;
-    private $text = null;
+    private $post_id = null;
+    private $contact = null;
+    private $content = null;
     private $end_date = null;
     private $is_active = null;
 
     public static $table = 'wp_advert_integration';
 
     function __construct(array $input) {
-        $this->article_id = $input['article_id'];
-        $this->name = $input['name'];
-        $this->text = $input['text'];
+        $this->post_id = $input['post_id'];
+        $this->contact = $input['contact'];
+        $this->content = $input['content'];
         $this->end_date = $input['end_date'];
         $this->is_active = $input['is_active'] ? 1 : 0;
-        $this->post = get_post($input['article_id']);
     }
 
     public function save()
     {
-        require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+        global $wpdb;
 
-        $sql = "INSERT INTO " . self::$table . " (`article_id`, `name`, `text`, `end_date`, `is_active`) VALUES ( " . $this->article_id . ", '" . $this->name . "', '" . $this->text . "', '" . $this->end_date . "', " . $this->is_active . ")";
+        $sql = "INSERT INTO " . self::$table . " (`post_id`, `contact`, `content`, `end_date`, `is_active`) VALUES ( " . $this->post_id . ", '" . $this->contact . "', '" . $this->content . "', '" . $this->end_date . "', " . $this->is_active . ")";
 
-        dbDelta($sql);
+        return $wpdb->get_results($sql);
     }
 
     public static function getAll(string $param = null, $page = 1)
@@ -36,7 +34,7 @@ class Advert
         $limit = 50;
         $offset = $limit * ($page-1);
 
-        return $wpdb->get_results("SELECT wp_advert_integration.*, wp_posts.post_name as url FROM " . self::$table . " as wp_advert_integration INNER JOIN wp_posts ON article_id = wp_posts.id ORDER BY wp_advert_integration.id DESC LIMIT " . $limit . " OFFSET " . $offset);
+        return $wpdb->get_results("SELECT wp_advert_integration.*, wp_posts.post_name as url FROM " . self::$table . " as wp_advert_integration INNER JOIN wp_posts ON post_id = wp_posts.id ORDER BY wp_advert_integration.id DESC LIMIT " . $limit . " OFFSET " . $offset);
     }
 
     public static function getCount(string $query = null)
@@ -56,8 +54,8 @@ class Advert
         return new Advert($res[0]);
     }
 
-    public function getText()
+    public function getContent()
     {
-        return $this->text;
+        return $this->content;
     }
 }

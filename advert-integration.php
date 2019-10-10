@@ -11,7 +11,6 @@ require_once plugin_dir_path(__FILE__) . 'includes/models/Advert.php';
 add_action('admin_menu', 'createLinkOnMainMenuAdvert');
 add_shortcode('article_advertising_place', 'renderIntegration');
 
-
 function createDatabaseAdvert()
 {
     global $table_prefix, $wpdb;
@@ -22,17 +21,21 @@ function createDatabaseAdvert()
     if($wpdb->get_var( "show tables like $wp_track_table" ) != $wp_track_table) 
     {
         $sql = "CREATE TABLE $wp_track_table (
-          id int(11) NOT NULL,
-          article_id int(11) DEFAULT NULL,
-          text text COLLATE utf8_unicode_ci,
-          name varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-          end_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          is_active tinyint(1) DEFAULT '1',
-          UNIQUE KEY id (id)
+          `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+          `post_id` bigint(20) UNSIGNED DEFAULT NULL,
+          `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+          `contact` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+          `end_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          `is_active` tinyint(1) NOT NULL DEFAULT '0',
+          PRIMARY KEY (`id`),
+          KEY `post_id` (`post_id`)
         );";
 
-        require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
-        dbDelta($sql);
+        $wpdb->get_results($sql);
+
+        $set_link = "ALTER TABLE $wp_track_table ADD CONSTRAINT `posts` FOREIGN KEY (`post_id`) REFERENCES `wp_posts`(`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+
+        $wpdb->get_results($set_link);
     }
 }
 
