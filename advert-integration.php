@@ -64,5 +64,5 @@ function createLinkOnMainMenuAdvert()
 function renderIntegration($atts)
 {
    $advert = Advert::find($atts['id'], true);
-   return $advert->getText();
+   return ($advert) ? $advert->getContent() : null;
 }

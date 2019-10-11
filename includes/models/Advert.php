@@ -51,7 +51,9 @@ class Advert
 
         $res = $wpdb->get_results("SELECT * FROM " . self::$table . " WHERE id = '$id' " . $where ." LIMIT 1",ARRAY_A);
 
-        return new Advert($res[0]);
+        $advert = (isset($res[0])) ? new Advert($res[0]) : null;
+
+        return $advert;
     }
 
     public function getContent()
