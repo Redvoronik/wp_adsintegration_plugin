@@ -9,6 +9,7 @@
 require_once plugin_dir_path(__FILE__) . 'includes/models/Advert.php';
 
 add_action('admin_menu', 'createLinkOnMainMenuAdvert');
+add_action('admin_init','loadVendor');
 add_shortcode('article_advertising_place', 'renderIntegration');
 
 function createDatabaseAdvert()
@@ -65,4 +66,13 @@ function renderIntegration($atts)
 {
    $advert = Advert::find($atts['id'], true);
    return ($advert) ? $advert->getContent() : null;
+}
+
+function loadVendor() {
+    wp_register_style('select2', plugins_url('includes/vendor/select2/css/select2.min.css',__FILE__ ));
+    wp_enqueue_style('select2');
+    wp_register_script('jquery', plugins_url('includes/vendor/jquery/jquery-3.4.1.min.js',__FILE__ ));
+    wp_enqueue_script('jquery');
+    wp_register_script('select2', plugins_url('includes/vendor/select2/js/select2.full.min.js',__FILE__ ));
+    wp_enqueue_script('select2');
 }
