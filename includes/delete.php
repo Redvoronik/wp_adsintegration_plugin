@@ -1,7 +1,7 @@
 <?php
-if(!empty($_POST))
+if(!empty($_GET))
 {
-	$advert = Advert::find($_POST['id']);
+	$advert = Advert::find($_GET['id']);
 	$advert->delete();
 
 	add_action( 'admin_notices', 'advert_save_success' );
