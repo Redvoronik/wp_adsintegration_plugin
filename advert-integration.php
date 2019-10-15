@@ -9,7 +9,7 @@
 require_once plugin_dir_path(__FILE__) . 'includes/models/Advert.php';
 
 add_action('admin_menu', 'createLinkOnMainMenuAdvert');
-add_action('admin_init','loadVendor');
+// add_action('admin_init','loadVendor');
 add_shortcode('article_advertising_place', 'renderIntegration');
 
 function createDatabaseAdvert()
@@ -60,6 +60,22 @@ function createLinkOnMainMenuAdvert()
         'manage_options',
         'advert-integration/includes/create.php'
     );
+
+    add_submenu_page(
+        null,
+        'Редактировать',
+        'Редактировать интеграцию',
+        'manage_options',
+        'advert-integration/includes/edit.php'
+    );
+
+    add_submenu_page(
+        null,
+        'Удалить',
+        'Удалить интеграцию',
+        'manage_options',
+        'advert-integration/includes/delete.php'
+    );
 }
 
 function renderIntegration($atts)
@@ -68,11 +84,20 @@ function renderIntegration($atts)
    return ($advert) ? $advert->getContent() : null;
 }
 
-function loadVendor() {
-    wp_register_style('select2', plugins_url('includes/vendor/select2/css/select2.min.css',__FILE__ ));
-    wp_enqueue_style('select2');
-    wp_register_script('jquery', plugins_url('includes/vendor/jquery/jquery-3.4.1.min.js',__FILE__ ));
-    wp_enqueue_script('jquery');
-    wp_register_script('select2', plugins_url('includes/vendor/select2/js/select2.full.min.js',__FILE__ ));
-    wp_enqueue_script('select2');
+function advert_save_success() {
+    ?>
+    <div class="notice notice-success is-dismissible">
+        <p><?php _e( 'Done!', 'sample-text-domain' ); ?></p>
+    </div>
+    <?php
 }
+
+
+// function loadVendor() {
+//     wp_register_style('select2', plugins_url('includes/vendor/select2/css/select2.min.css',__FILE__ ));
+//     wp_enqueue_style('select2');
+//     wp_register_script('jquery3', plugins_url('includes/vendor/jquery/jquery-3.4.1.min.js',__FILE__),array('jquery'), '3.4.1', true);
+//     wp_enqueue_script('jquery3');
+//     wp_register_script('select2', plugins_url('includes/vendor/select2/js/select2.full.min.js',__FILE__ ));
+//     wp_enqueue_script('select2');
+// }
