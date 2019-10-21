@@ -1,8 +1,9 @@
 <?php
-	$param 	= $_GET['param'] ?? null;
-	$page 	= $_GET['page'] ?? 1;
+	$page 	= $_GET['paget'] ?? 1;
+	$orderBy = $_GET['orderby'] ?? 'id';
+	$order 	= $_GET['order'] ?? 'desc';
 
-	$adverts 	= Advert::getAll($param);
+	$adverts 	= Advert::getAll($page, $orderBy, $order);
 
 	$mainUrl = '/wp-admin/admin.php?page=advert-integration%2Fincludes%2F';
 
@@ -28,7 +29,7 @@
 		<tr>
 			<?php foreach($params as $key => $value): ?>
 			<th scope="col" id="<?= $key ?>" class="manage-column column-username column-primary sortable desc">
-				<a href="http://maks.local/wp-admin/users.php?orderby=<?= $key ?>&amp;order=asc">
+				<a href="/wp-admin/admin.php?page=advert-integration%2Fincludes%2Findex.php&amp;orderby=<?= $key ?>&amp;order=<?= ($key == $orderBy && $order == 'asc') ? 'desc' : 'asc' ?>">
 					<span><?= $value ?></span>
 					<span class="sorting-indicator"></span>
 				</a>
@@ -42,12 +43,12 @@
 		<?php foreach($adverts as $advert): ?>
 			<tr>
 				<td>
-					<a target="_blank" href="/<?= $advert->url ?>"><strong><?= $advert->post_id ?></strong></a>
+					<a title="<?= $advert->post_title ?>" target="_blank" href="/<?= $advert->url ?>"><strong><?= $advert->post_id ?> - <?= $advert->post_title ?></strong></a>
 					<div class="row-actions">
 						<span class="edit"><a href="/wp-admin/admin.php?page=advert-integration%2Fincludes%2Fedit.php&post_id=<?= $advert->id ?>">Изменить</a> | </span><span class="submitdelete"><a href="/wp-admin/admin.php?page=advert-integration%2Fincludes%2Fdelete.php&id=<?= $advert->id ?>">Удалить</a></span></div>
 				</td>
 				<td><?= $advert->contact ?></td>
-				<td><?= $advert->end_date ?></td>
+				<td><?= date('d.m.y', strtotime($advert->end_date)) ?></td>
 				<td>[article_advertising_place id="<?= $advert->id ?>"]<div class="row-actions">
 						<span class="edit"><a href="#" onclick="copyShortcode('<?= $advert->id ?>')">Копировать в буфер</a></div></td>
 				<td><?= (($advert->is_active) ? 'Да' : 'Нет') ?></td>

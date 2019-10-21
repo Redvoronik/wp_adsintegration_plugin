@@ -52,14 +52,14 @@ class Advert
         return $wpdb->get_results($sql);
     }
 
-    public static function getAll(string $param = null, $page = 1)
+    public static function getAll($page = 1, $orderBy = 'id', $order = 'DESC')
     {
         global $wpdb;
 
         $limit = 50;
         $offset = $limit * ($page-1);
 
-        return $wpdb->get_results("SELECT wp_advert_integration.*, wp_posts.post_name as url FROM " . self::$table . " as wp_advert_integration INNER JOIN wp_posts ON post_id = wp_posts.id ORDER BY wp_advert_integration.id DESC LIMIT " . $limit . " OFFSET " . $offset);
+        return $wpdb->get_results("SELECT wp_advert_integration.*, wp_posts.post_name as url, wp_posts.post_title as post_title FROM " . self::$table . " as wp_advert_integration INNER JOIN wp_posts ON post_id = wp_posts.id ORDER BY wp_advert_integration." . $orderBy . " " . $order . " LIMIT " . $limit . " OFFSET " . $offset);
     }
 
     public static function getCount(string $query = null)
@@ -84,6 +84,11 @@ class Advert
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function getPost()
+    {
+        return get_post($this->post_id);
     }
 
     public function getPostId()
