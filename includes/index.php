@@ -28,7 +28,7 @@
 		<thead>
 		<tr>
 			<?php foreach($params as $key => $value): ?>
-			<th scope="col" id="<?= $key ?>" class="manage-column column-username column-primary sortable desc">
+			<th scope="col" id="<?= $key ?>" class="manage-column column-username column-primary sortable <?= ($key == $orderBy && $order == 'asc') ? 'desc' : 'asc' ?>">
 				<a href="/wp-admin/admin.php?page=advert-integration%2Fincludes%2Findex.php&amp;orderby=<?= $key ?>&amp;order=<?= ($key == $orderBy && $order == 'asc') ? 'desc' : 'asc' ?>">
 					<span><?= $value ?></span>
 					<span class="sorting-indicator"></span>
