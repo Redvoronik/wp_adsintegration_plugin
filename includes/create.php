@@ -3,8 +3,6 @@ if(!empty($_POST) && !isset($_POST['id']))
 {
 	$advert = new Advert($_POST);
 	$advert->save();
-
-	add_action( 'admin_notices', 'advert_save_success' );
 }
 ?>
 

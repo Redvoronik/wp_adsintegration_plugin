@@ -48,17 +48,17 @@ function createLinkOnMainMenuAdvert()
         'Рекламные интеграции',
         'Рекламные интеграции',
         'manage_options',
-        'advert-integration/includes/main.php',
+        '/advert-integration/includes/index.php',
         null,
         'dashicons-migrate'
     );
 
     add_submenu_page(
-        'advert-integration/includes/main.php',
+        'advert-integration/includes/index.php',
         'Добавить новую',
         'Добавить новую',
         'manage_options',
-        'advert-integration/includes/create.php'
+        '/advert-integration/includes/create.php'
     );
 
     add_submenu_page(
@@ -66,7 +66,7 @@ function createLinkOnMainMenuAdvert()
         'Редактировать',
         'Редактировать интеграцию',
         'manage_options',
-        'advert-integration/includes/edit.php'
+        '/advert-integration/includes/edit.php'
     );
 
     add_submenu_page(
@@ -74,7 +74,7 @@ function createLinkOnMainMenuAdvert()
         'Удалить',
         'Удалить интеграцию',
         'manage_options',
-        'advert-integration/includes/delete.php'
+        '/advert-integration/includes/delete.php'
     );
 }
 
@@ -83,21 +83,3 @@ function renderIntegration($atts)
    $advert = Advert::find($atts['id'], true);
    return ($advert) ? $advert->getContent() : null;
 }
-
-function advert_save_success() {
-    ?>
-    <div class="notice notice-success is-dismissible">
-        <p><?php _e( 'Done!', 'sample-text-domain' ); ?></p>
-    </div>
-    <?php
-}
-
-
-// function loadVendor() {
-//     wp_register_style('select2', plugins_url('includes/vendor/select2/css/select2.min.css',__FILE__ ));
-//     wp_enqueue_style('select2');
-//     wp_register_script('jquery3', plugins_url('includes/vendor/jquery/jquery-3.4.1.min.js',__FILE__),array('jquery'), '3.4.1', true);
-//     wp_enqueue_script('jquery3');
-//     wp_register_script('select2', plugins_url('includes/vendor/select2/js/select2.full.min.js',__FILE__ ));
-//     wp_enqueue_script('select2');
-// }

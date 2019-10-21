@@ -48,7 +48,8 @@
 				</td>
 				<td><?= $advert->contact ?></td>
 				<td><?= $advert->end_date ?></td>
-				<td>[article_advertising_place id="<?= $advert->id ?>"]</td>
+				<td>[article_advertising_place id="<?= $advert->id ?>"]<div class="row-actions">
+						<span class="edit"><a href="#" onclick="copyShortcode('<?= $advert->id ?>')">Копировать в буфер</a></div></td>
 				<td><?= (($advert->is_active) ? 'Да' : 'Нет') ?></td>
 			</tr>
 		<?php endforeach; ?>
@@ -62,3 +63,13 @@
 	<?php endif;?>
 </div>
 
+<script type="text/javascript">
+	function copyShortcode(text) {
+		text = "[article_advertising_place id=" + text + "]";
+		navigator.clipboard.writeText(text).then(function() {
+		  console.log('Async: Copying to clipboard was successful!');
+		}, function(err) {
+		  console.error('Async: Could not copy text: ', err);
+		});
+	}
+</script>
