@@ -41,7 +41,7 @@
 		<tbody id="the-list" data-wp-lists="list:user">
 			
 		<?php foreach($adverts as $advert): ?>
-			<tr>
+			<tr <?php if(!$advert->is_active || strtotime($advert->end_date) < time()): ?>class="strip"<?php endif; ?>>
 				<td>
 					<a title="<?= $advert->post_title ?>" target="_blank" href="/<?= $advert->url ?>"><strong><?= $advert->post_id ?> - <?= $advert->post_title ?></strong></a>
 					<div class="row-actions">
@@ -74,3 +74,12 @@
 		});
 	}
 </script>
+
+<style type="text/css">
+	.strip td a {
+		color: #ccc !important;
+	}
+	.strip td {
+		color: #ccc !important;
+	}
+</style>
