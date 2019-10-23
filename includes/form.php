@@ -1,4 +1,4 @@
-<form method="post" action="/wp-admin/admin.php?page=advert-integration%2Fincludes%2F<?= (isset($advert)) ? 'edit.php' : 'create.php' ?>">
+<form method="post" action="/wp-admin/admin.php?page=wp_adsintegration_plugin%2Fincludes%2F<?= (isset($advert)) ? 'edit.php' : 'create.php' ?>">
 	<table class="form-table" role="presentation">
 		<tbody>
 		<?php if(isset($advert)): ?>

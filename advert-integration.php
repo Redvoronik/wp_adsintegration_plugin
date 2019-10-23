@@ -48,17 +48,17 @@ function createLinkOnMainMenuAdvert()
         'Рекламные интеграции',
         'Рекламные интеграции',
         'manage_options',
-        '/advert-integration/includes/index.php',
+        '/wp_adsintegration_plugin/includes/index.php',
         null,
         'dashicons-migrate'
     );
 
     add_submenu_page(
-        'advert-integration/includes/index.php',
+        'wp_adsintegration_plugin/includes/index.php',
         'Добавить новую',
         'Добавить новую',
         'manage_options',
-        '/advert-integration/includes/create.php'
+        '/wp_adsintegration_plugin/includes/create.php'
     );
 
     add_submenu_page(
@@ -66,7 +66,7 @@ function createLinkOnMainMenuAdvert()
         'Редактировать',
         'Редактировать интеграцию',
         'manage_options',
-        '/advert-integration/includes/edit.php'
+        '/wp_adsintegration_plugin/includes/edit.php'
     );
 
     add_submenu_page(
@@ -74,7 +74,7 @@ function createLinkOnMainMenuAdvert()
         'Удалить',
         'Удалить интеграцию',
         'manage_options',
-        '/advert-integration/includes/delete.php'
+        '/wp_adsintegration_plugin/includes/delete.php'
     );
 }
 
