@@ -5,7 +5,7 @@
 
 	$adverts 	= Advert::getAll($page, $orderBy, $order);
 
-	$mainUrl = '/wp-admin/admin.php?page=advert-integration%2Fincludes%2F';
+	$mainUrl = '/wp-admin/admin.php?page=wp_adsintegration_plugin%2Fincludes%2F';
 
 	$params = [
 		'post_id' => 'ID статьи', 
@@ -29,7 +29,7 @@
 		<tr>
 			<?php foreach($params as $key => $value): ?>
 			<th scope="col" id="<?= $key ?>" class="manage-column column-username column-primary sortable <?= ($key == $orderBy && $order == 'asc') ? 'desc' : 'asc' ?>">
-				<a href="/wp-admin/admin.php?page=advert-integration%2Fincludes%2Findex.php&amp;orderby=<?= $key ?>&amp;order=<?= ($key == $orderBy && $order == 'asc') ? 'desc' : 'asc' ?>">
+				<a href="/wp-admin/admin.php?page=wp_adsintegration_plugin%2Fincludes%2Findex.php&amp;orderby=<?= $key ?>&amp;order=<?= ($key == $orderBy && $order == 'asc') ? 'desc' : 'asc' ?>">
 					<span><?= $value ?></span>
 					<span class="sorting-indicator"></span>
 				</a>
@@ -45,7 +45,7 @@
 				<td>
 					<a title="<?= $advert->post_title ?>" target="_blank" href="/<?= $advert->url ?>"><strong><?= $advert->post_id ?> - <?= $advert->post_title ?></strong></a>
 					<div class="row-actions">
-						<span class="edit"><a href="/wp-admin/admin.php?page=advert-integration%2Fincludes%2Fedit.php&post_id=<?= $advert->id ?>">Изменить</a> | </span><span class="submitdelete"><a href="/wp-admin/admin.php?page=advert-integration%2Fincludes%2Fdelete.php&id=<?= $advert->id ?>">Удалить</a></span></div>
+						<span class="edit"><a href="/wp-admin/admin.php?page=wp_adsintegration_plugin%2Fincludes%2Fedit.php&post_id=<?= $advert->id ?>">Изменить</a> | </span><span class="submitdelete"><a href="/wp-admin/admin.php?page=wp_adsintegration_plugin%2Fincludes%2Fdelete.php&id=<?= $advert->id ?>">Удалить</a></span></div>
 				</td>
 				<td><?= $advert->contact ?></td>
 				<td><?= date('d.m.y', strtotime($advert->end_date)) ?></td>
