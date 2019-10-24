@@ -9,7 +9,7 @@ class Advert
     private $is_active = 0;
     public static $table = 'wp_advert_integration';
     function __construct(array $input) {
-        $this->id = $input['id'];
+        $this->id = (isset($input['id'])) ?? null;
         $this->post_id = $input['post_id'];
         $this->contact = $input['contact'];
         $this->content = $input['content'];
