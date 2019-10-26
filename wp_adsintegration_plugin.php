@@ -46,7 +46,7 @@ function createLinkOnMainMenuAdvert()
     add_menu_page(
         'Рекламные интеграции',
         'Рекламные интеграции',
-        'manage_options',
+        'edit_others_posts',
         '/wp_adsintegration_plugin/includes/index.php',
         null,
         'dashicons-migrate'
@@ -56,7 +56,7 @@ function createLinkOnMainMenuAdvert()
         'wp_adsintegration_plugin/includes/index.php',
         'Добавить новую',
         'Добавить новую',
-        'manage_options',
+        'edit_others_posts',
         '/wp_adsintegration_plugin/includes/create.php'
     );
 
@@ -64,7 +64,7 @@ function createLinkOnMainMenuAdvert()
         null,
         'Редактировать',
         'Редактировать интеграцию',
-        'manage_options',
+        'edit_others_posts',
         '/wp_adsintegration_plugin/includes/edit.php'
     );
 
@@ -72,7 +72,7 @@ function createLinkOnMainMenuAdvert()
         null,
         'Удалить',
         'Удалить интеграцию',
-        'manage_options',
+        'edit_others_posts',
         '/wp_adsintegration_plugin/includes/delete.php'
     );
 }
