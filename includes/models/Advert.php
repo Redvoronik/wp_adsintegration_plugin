@@ -49,12 +49,12 @@ class Advert
     }
     public static function getCount(string $query = null)
     {
-        global $wpdb;
+        global $wpdb, $table_prefix;
         return $wpdb->get_results("SELECT count(*) as count FROM {$table_prefix}" . self::$table . " " . $query);
     }
     public static function find(int $id, $is_active = false)
     {
-        global $wpdb;
+        global $wpdb, $table_prefix;
         $where = ($is_active) ? " AND is_active = '$is_active' AND end_date > NOW()" : null;
         $res = $wpdb->get_results("SELECT * FROM {$table_prefix}" . self::$table . " WHERE id = '$id' " . $where ." LIMIT 1",ARRAY_A);
         $advert = (isset($res[0])) ? new Advert($res[0]) : null;
