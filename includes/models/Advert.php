@@ -18,14 +18,14 @@ class Advert
     }
     public function save()
     {
-        global $wpdb;
+        global $wpdb, $table_prefix;
 
         $sql = "INSERT INTO {$table_prefix}" . self::$table . " (`post_id`, `contact`, `content`, `end_date`, `is_active`) VALUES ( " . $this->post_id . ", '" . $this->contact . "', '" . $this->content . "', '" . $this->end_date . "', " . $this->is_active . ")";
         return $wpdb->get_results($sql);
     }
     public function update()
     {
-        global $wpdb;
+        global $wpdb, $table_prefix;
         $sql = "UPDATE {$table_prefix}" . self::$table . " SET 
         `post_id` = \"" . $this->post_id . "\", 
         `contact` = \"" . $this->contact . "\",
@@ -36,27 +36,27 @@ class Advert
     }
     public function delete()
     {
-        global $wpdb;
-        $sql = "DELETE FROM " . self::$table . " WHERE id = " . $this->id;
+        global $wpdb, $table_prefix;
+        $sql = "DELETE FROM {$table_prefix}" . self::$table . " WHERE id = " . $this->id;
         return $wpdb->get_results($sql);
     }
     public static function getAll($page = 1, $orderBy = 'id', $order = 'DESC')
     {
-        global $wpdb;
+        global $wpdb, $table_prefix;
         $limit = 50;
         $offset = $limit * ($page-1);
-        return $wpdb->get_results("SELECT {$table_prefix}advert_integration.*, {$table_prefix}posts.post_name as url, {$table_prefix}posts.post_title as post_title FROM " . self::$table . " as {$table_prefix}advert_integration INNER JOIN {$table_prefix}posts ON post_id = {$table_prefix}posts.id ORDER BY {$table_prefix}advert_integration." . $orderBy . " " . $order . " LIMIT " . $limit . " OFFSET " . $offset);
+        return $wpdb->get_results("SELECT {$table_prefix}" . self::$table . ".*, {$table_prefix}posts.post_name as url, {$table_prefix}posts.post_title as post_title FROM {$table_prefix}" . self::$table . " as " . self::$table . " INNER JOIN {$table_prefix}posts ON post_id = {$table_prefix}posts.id ORDER BY " . self::$table . "." . $orderBy . " " . $order . " LIMIT " . $limit . " OFFSET " . $offset);
     }
     public static function getCount(string $query = null)
     {
         global $wpdb;
-        return $wpdb->get_results('SELECT count(*) as count FROM ' . self::$table . ' ' . $query);
+        return $wpdb->get_results("SELECT count(*) as count FROM {$table_prefix}" . self::$table . " " . $query);
     }
     public static function find(int $id, $is_active = false)
     {
         global $wpdb;
         $where = ($is_active) ? " AND is_active = '$is_active' AND end_date > NOW()" : null;
-        $res = $wpdb->get_results("SELECT * FROM " . self::$table . " WHERE id = '$id' " . $where ." LIMIT 1",ARRAY_A);
+        $res = $wpdb->get_results("SELECT * FROM {$table_prefix}" . self::$table . " WHERE id = '$id' " . $where ." LIMIT 1",ARRAY_A);
         $advert = (isset($res[0])) ? new Advert($res[0]) : null;
         return $advert;
     }
