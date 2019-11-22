@@ -45,7 +45,7 @@ class Advert
         global $wpdb, $table_prefix;
         $limit = 50;
         $offset = $limit * ($page-1);
-        return $wpdb->get_results("SELECT {$table_prefix}" . self::$table . ".*, {$table_prefix}posts.post_name as url, {$table_prefix}posts.post_title as post_title FROM {$table_prefix}" . self::$table . " as " . self::$table . " INNER JOIN {$table_prefix}posts ON post_id = {$table_prefix}posts.id ORDER BY " . self::$table . "." . $orderBy . " " . $order . " LIMIT " . $limit . " OFFSET " . $offset);
+        return $wpdb->get_results("SELECT " . self::$table . ".*, {$table_prefix}posts.post_name as url, {$table_prefix}posts.post_title as post_title FROM {$table_prefix}" . self::$table . " as " . self::$table . " INNER JOIN {$table_prefix}posts ON post_id = {$table_prefix}posts.id ORDER BY " . self::$table . "." . $orderBy . " " . $order . " LIMIT " . $limit . " OFFSET " . $offset);
     }
     public static function getCount(string $query = null)
     {
