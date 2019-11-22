@@ -33,7 +33,7 @@ function createDatabaseAdvert()
 
         $wpdb->get_results($sql);
 
-        $set_link = "ALTER TABLE $wp_track_table ADD CONSTRAINT `posts` FOREIGN KEY (`post_id`) REFERENCES `wp_posts`(`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT";
+        $set_link = "ALTER TABLE $wp_track_table ADD CONSTRAINT `posts` FOREIGN KEY (`post_id`) REFERENCES `{$table_prefix}posts`(`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT";
 
         $wpdb->get_results($set_link);
     }

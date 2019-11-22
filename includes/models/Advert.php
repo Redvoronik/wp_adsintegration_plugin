@@ -7,7 +7,7 @@ class Advert
     private $content = null;
     private $end_date = null;
     private $is_active = 0;
-    public static $table = 'wp_advert_integration';
+    public static $table = 'advert_integration';
     function __construct(array $input) {
         $this->id = (isset($input['id'])) ?? null;
         $this->post_id = $input['post_id'];
@@ -19,13 +19,14 @@ class Advert
     public function save()
     {
         global $wpdb;
-        $sql = "INSERT INTO " . self::$table . " (`post_id`, `contact`, `content`, `end_date`, `is_active`) VALUES ( " . $this->post_id . ", '" . $this->contact . "', '" . $this->content . "', '" . $this->end_date . "', " . $this->is_active . ")";
+
+        $sql = "INSERT INTO {$table_prefix}" . self::$table . " (`post_id`, `contact`, `content`, `end_date`, `is_active`) VALUES ( " . $this->post_id . ", '" . $this->contact . "', '" . $this->content . "', '" . $this->end_date . "', " . $this->is_active . ")";
         return $wpdb->get_results($sql);
     }
     public function update()
     {
         global $wpdb;
-        $sql = "UPDATE " . self::$table . " SET 
+        $sql = "UPDATE {$table_prefix}" . self::$table . " SET 
         `post_id` = \"" . $this->post_id . "\", 
         `contact` = \"" . $this->contact . "\",
         `content` = \"" . $this->content . "\", 
@@ -44,7 +45,7 @@ class Advert
         global $wpdb;
         $limit = 50;
         $offset = $limit * ($page-1);
-        return $wpdb->get_results("SELECT wp_advert_integration.*, wp_posts.post_name as url, wp_posts.post_title as post_title FROM " . self::$table . " as wp_advert_integration INNER JOIN wp_posts ON post_id = wp_posts.id ORDER BY wp_advert_integration." . $orderBy . " " . $order . " LIMIT " . $limit . " OFFSET " . $offset);
+        return $wpdb->get_results("SELECT {$table_prefix}advert_integration.*, {$table_prefix}posts.post_name as url, {$table_prefix}posts.post_title as post_title FROM " . self::$table . " as {$table_prefix}advert_integration INNER JOIN {$table_prefix}posts ON post_id = {$table_prefix}posts.id ORDER BY {$table_prefix}advert_integration." . $orderBy . " " . $order . " LIMIT " . $limit . " OFFSET " . $offset);
     }
     public static function getCount(string $query = null)
     {
